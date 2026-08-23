@@ -9,19 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name = "productos")
-public class ProductoModel {
+@Table(name = "categorias")
+public class CategoriaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "nombre", nullable = false)
     private String name;
-
-    @Column(name = "precio", nullable = false)
-    private int price;
-
-    @ManyToOne
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private CategoriaModel categoria;
 }

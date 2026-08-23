@@ -17,6 +17,7 @@
         </provider>
 
         <class>org.example.models.ProductoModel</class>
+        <class>org.example.models.CategoriaModel</class>
 
         <properties>
 
