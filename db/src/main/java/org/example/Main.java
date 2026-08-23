@@ -3,7 +3,11 @@ package org.example;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.example.managers.LocalStorageManager;
+import org.example.managers.MysqlManager;
+import org.example.models.CategoriaModel;
 import org.example.models.ProductoModel;
+import org.example.repositories.CategoriaRepository;
 import org.example.repositories.ProductoRepository;
 
 public class Main {
@@ -18,27 +22,29 @@ public class Main {
                             "config-mysql"
                     );
 
-            entityManager =
-                    entityManagerFactory.createEntityManager();
+            entityManager = entityManagerFactory.createEntityManager();
 
-            System.out.println(
-                    "CONEXIÓN CON MYSQL EXITOSA"
-            );
+            System.out.println("CONEXIÓN CON MYSQL EXITOSA");
+
+            MysqlManager mysqlManager =
+                    new MysqlManager(entityManager);
 
             ProductoRepository productoRepository =
-                    new ProductoRepository(entityManager);
+                    new ProductoRepository(mysqlManager);
+
+            CategoriaRepository categoriaRepository =
+                    new CategoriaRepository(mysqlManager);
+
+            CategoriaModel categoria = new CategoriaModel();
+            categoria.setName("Celulares");
+            categoriaRepository.save(categoria);
 
 
             // CREAR PRODUCTO
-            ProductoModel producto =
-                    new ProductoModel();
-
+            ProductoModel producto = new ProductoModel();
             producto.setName("Iphone 17 Pro Max");
-
             producto.setPrice(15000);
-
-
-            // GUARDAR EN MYSQL
+            producto.setCategoria(categoria);
             productoRepository.save(producto);
 
 
@@ -48,8 +54,37 @@ public class Main {
 
             productoRepository
                     .getAll()
-                    .forEach(System.out::println);
+                    .forEach(p -> {
+                        System.out.println("ID: " + p.getId());
+                        System.out.println("Producto: " + p.getName());
+                        System.out.println("Precio: " + p.getPrice());
+                        System.out.println("Categoria: " + p.getCategoria().getName());
+                        System.out.println("-------------------------");
+                    } );
 
+            LocalStorageManager localStorageManager = new LocalStorageManager();
+            ProductoRepository productoCacheRepository = new ProductoRepository(localStorageManager);
+            CategoriaRepository categoriaCacheRepository = new CategoriaRepository(localStorageManager);
+
+            CategoriaModel categoriaCache = new CategoriaModel();
+            categoriaCache.setName("Computadoras");
+            categoriaCacheRepository.save(categoriaCache);
+
+            ProductoModel productoCache = new ProductoModel();
+            productoCache.setName("Macbook Pro 2024");
+            productoCache.setPrice(25000);
+            productoCache.setCategoria(categoriaCache);
+            productoCacheRepository.save(productoCache);
+
+            System.out.println("===== PRODUCTOS EN CACHE =====");
+            productoCacheRepository.getAll()
+                    .forEach(p -> {
+                        System.out.println("ID: " + p.getId());
+                        System.out.println("Producto: " + p.getName());
+                        System.out.println("Precio: " + p.getPrice());
+                        System.out.println("Categoria: " + p.getCategoria().getName());
+                        System.out.println("-------------------------");
+                    });
 
         } catch (Exception e) {
 
