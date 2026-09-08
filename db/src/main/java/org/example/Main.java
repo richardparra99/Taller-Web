@@ -16,11 +16,7 @@ public class Main {
         EntityManager entityManager = null;
 
         try {
-
-            entityManagerFactory =
-                    Persistence.createEntityManagerFactory(
-                            "config-mysql"
-                    );
+            entityManagerFactory = Persistence.createEntityManagerFactory("config-mysql");
 
             entityManager = entityManagerFactory.createEntityManager();
 
@@ -62,7 +58,7 @@ public class Main {
                         System.out.println("-------------------------");
                     } );
 
-            LocalStorageManager localStorageManager = new LocalStorageManager();
+            MysqlManager localStorageManager = new MysqlManager(entityManager);
             ProductoRepository productoCacheRepository = new ProductoRepository(localStorageManager);
             CategoriaRepository categoriaCacheRepository = new CategoriaRepository(localStorageManager);
 
