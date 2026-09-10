@@ -15,7 +15,7 @@ import lombok.*;
                         "estudiante_id", "materia_id"
                 })
 })
-public class IncripcionModel {
+public class InscripcionModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

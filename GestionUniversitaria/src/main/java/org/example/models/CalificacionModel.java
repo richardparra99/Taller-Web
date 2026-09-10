@@ -18,7 +18,7 @@ public class CalificacionModel {
 
     @ManyToOne
     @JoinColumn(name = "inscripcion_id", nullable = false)
-    private IncripcionModel inscripcion;
+    private InscripcionModel inscripcion;
 
     @Column(name = "nombre_evaluacion", nullable = false)
     private String nombreEvaluacion;
