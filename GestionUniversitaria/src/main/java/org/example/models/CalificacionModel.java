@@ -27,5 +27,5 @@ public class CalificacionModel {
     private double nota;
 
     @Column(name = "ponderacion")
-    private double ponderacion;
+    private Double ponderacion;
 }
