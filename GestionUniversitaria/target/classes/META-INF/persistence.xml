@@ -32,7 +32,7 @@
             <!-- BASE DE DATOS -->
             <property
                     name="jakarta.persistence.jdbc.url"
-                    value="jdbc:mysql://localhost:3306/gestion_universitaria_db?useSSL=false&amp;serverTimezone=UTC"/>
+                    value="jdbc:mysql://localhost:3306/gestion_universitaria_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
 
             <!-- USUARIO MYSQL -->
             <property
