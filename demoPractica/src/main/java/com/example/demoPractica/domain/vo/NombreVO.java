@@ -9,6 +9,10 @@ public class NombreVO {
     private int limiteMin = 2;
 
     public NombreVO(String valor) {
+        if(valor == null) {
+            throw new RuntimeException("El nombre no puede ser nulo o vacío");
+
+        }
         if (valor.length() < limiteMin) {
             throw new RuntimeException("El nombre debe tener al menos " + limiteMin + " caracteres");
         }

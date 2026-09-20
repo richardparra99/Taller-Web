@@ -5,10 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class PersonaModel {
+    private Long id;
     private NombreVO nombre;
     private String celular;
 
-    public PersonaModel(String nombre, String celular) {
+    public PersonaModel(Long id, String nombre, String celular) {
+        this.id = id;
         this.nombre = new NombreVO(nombre);
         this.celular = celular;
     }
