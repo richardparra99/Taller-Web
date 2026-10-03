@@ -21,4 +21,8 @@ public class NombreVO {
         }
         this.valor = valor;
     }
+
+    public String setValor() {
+        return valor;
+    }
 }
