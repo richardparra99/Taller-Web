@@ -1,18 +1,17 @@
 package com.example.demoPractica.domain.model;
 
-import com.example.demoPractica.domain.vo.NombreVO;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PersonaModel {
-    private Long id;
-    private NombreVO nombre;
+    private int id;
+    private String nombre;
+    private String email;
+    private String password;
     private String celular;
-
-    public PersonaModel(Long id, String nombre, String celular) {
-        this.id = id;
-        this.nombre = new NombreVO(nombre);
-        this.celular = celular;
-    }
 
 }
